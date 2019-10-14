@@ -188,9 +188,9 @@ public interface EmployeeMapper extends BaseMapper<Employee> {
 
 #### 3.1.1 插入操作
 
-使用了MybatisPlus以后，我们不需要再编写单表的CRUD操作的方法，也不需要编写分页的方法，这些方法都通过BaseMapper得到继承。
+使用了MybatisPlus以后，我们不需要再编写单表的CRUD操作的方法，也不需要编写分页的方法，这些方法都通过`BaseMapper`得到继承。
 
-> 我们可以打开BaseMapper的源码查看继承的方法：
+> 我们可以打开`BaseMapper`的源码查看继承的方法：
 >
 > ![1570979960854](assets/1570979960854.png)
 
