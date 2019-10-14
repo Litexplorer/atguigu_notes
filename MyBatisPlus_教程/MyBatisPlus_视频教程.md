@@ -252,9 +252,34 @@ public class EmployeeMapperTest extends LoadApplication {
 
 
 
+**关于插入操作中重点讲解的地方**
+
+1. 使用注解`@TableName`可以指定当前实体类和哪个数据库表之间对应关系，如果在项目中，我们的数据库的所有表的命名都是以某个字符串开头的（例如“tbl”），那么我们可以通过MybatisPlus的全局配置文件中进行配置这个前缀：
+
+   ```xml
+   <property name="tablePrefix" value="tbl_"></property>
+   ```
+
+2. 在上面的练习代码中，数据库某个表的字段和实体类的字段存在“下划线→驼峰”的转换规则，MybatisPlus自动帮我们实现了这种转换（last_name→lastName），这是MybatisPlus-2.3之后加入的默认规则。另外，我们也可以在MybatisPlus的全局配置文件中手动配置：
+
+   ```xml
+    <property name="dbColumnUnderline" value="true"></property>
+   ```
+
+3. 使用注解`@TableId`可以指定主键自增的策略（默认的策略可以在`@TableId`的源码中查看到），我们可以在MybatisPlus的全局配置文件中指定所有的自增策略：
+
+   ```xml
+   <property name="idType" value="0"></property>
+   ```
+
+   > 上面的`value`的值为什么设置为0？
+   >
+   > - 可以在源码中查看到端倪：`@idType`的枚举类型中，0代表的是`IdType.AUTO`类型。
 
 
 
+**额外补充知识点：**
 
-
+1. 注解配置`@TableField(exist=“false”)`可以将某个成员属性设置为“忽略字段”：在生成SQL的时候不会产生该字段的信息。
+2. 使用MybatisPlus的通用插入操作时，框架会自动把主键值回写到实体类中，因此，我们只需要直接获取实体类中的主键值即可。
 
